@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "218141265274",
+    "firebase_url": "https://smartstorehouse-5d201.firebaseio.com",
+    "project_id": "smartstorehouse-5d201",
+    "storage_bucket": "smartstorehouse-5d201.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218141265274:android:4443395e952db9600ddac3",
+        "android_client_info": {
+          "package_name": "com.nik35.smartstorehouse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218141265274-64sn9p7pnusuc4g6lk2ubbfcltmnjf76.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nik35.smartstorehouse",
+            "certificate_hash": "9e5998ace3070c5a9e237316ce6d626a8fce523b"
+          }
+        },
+        {
+          "client_id": "218141265274-11ijmp7r8b49jrkree4fuob326ok6abd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIn5yGn5NyoiAvUkgTC2YAGd1kjedlvoQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218141265274-11ijmp7r8b49jrkree4fuob326ok6abd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
