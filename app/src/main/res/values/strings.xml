@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SmartStorehouse</string>
+    <string name="container_edit_hint_name">Название контейнера</string>
+    <string name="container_edit_hint_item_name">Что внутри?</string>
 </resources>

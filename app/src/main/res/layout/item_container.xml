@@ -18,12 +18,12 @@
             android:scaleType="centerCrop"/>
 
         <TextView
+            android:id="@+id/name"
             style="@style/StyleContainerText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorTextContainerBg"
             android:padding="5dp"
-            android:layout_gravity="bottom"
-            android:text="temp temp temp"/>
+            android:layout_gravity="bottom" />
     </androidx.cardview.widget.CardView>
 </FrameLayout>

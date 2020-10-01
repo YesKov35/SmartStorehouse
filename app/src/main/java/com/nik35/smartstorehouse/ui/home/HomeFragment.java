@@ -3,17 +3,23 @@ package com.nik35.smartstorehouse.ui.home;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.nik35.smartstorehouse.R;
 import com.nik35.smartstorehouse.adapters.RecyclerAdapter;
 import com.nik35.smartstorehouse.adapters.RecyclerModel;
+import com.nik35.smartstorehouse.data.models.Container;
 import com.nik35.smartstorehouse.ui.BaseFragment;
 import com.nik35.smartstorehouse.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,8 +38,6 @@ public class HomeFragment extends BaseFragment {
 
         List<RecyclerModel> recyclerModels = new ArrayList<>();
 
-        recyclerModels.add(new RecyclerModel(Constants.CONTAINER_ITEM));
-
         RecyclerView homeRecycler = $(R.id.home_recycler);
 
         RecyclerAdapter adapter = new RecyclerAdapter(this, recyclerModels);
@@ -44,8 +48,28 @@ public class HomeFragment extends BaseFragment {
         FloatingActionButton addContainer = $(R.id.add_container);
 
         addContainer.setOnClickListener(view -> {
-            recyclerModels.add(new RecyclerModel(Constants.CONTAINER_ITEM));
-            adapter.notifyDataSetChanged();
+            Container container = new Container();
+            container.setName("Контейнер");
+            dataRepository.getMyRef().push().setValue(container);
+        });
+
+        dataRepository.getMyRef().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                recyclerModels.clear();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Container container = postSnapshot.getValue(Container.class);
+                    if(container != null) {
+                        container.setId(postSnapshot.getKey());
+                        recyclerModels.add(new RecyclerModel(Constants.CONTAINER_ITEM, container));
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
         });
 
         homeRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -63,5 +87,10 @@ public class HomeFragment extends BaseFragment {
                 super.onScrollStateChanged(recyclerView, newState);
             }
         });
+    }
+
+    public void selectedContainer(Container container){
+        dataRepository.setSelectedContainer(container);
+        Navigation.findNavController(requireView()).navigate(R.id.containerEditFragment);
     }
 }

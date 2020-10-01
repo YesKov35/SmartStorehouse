@@ -3,8 +3,11 @@ package com.nik35.smartstorehouse.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.nik35.smartstorehouse.R;
+import com.nik35.smartstorehouse.data.models.Container;
+import com.nik35.smartstorehouse.ui.home.HomeFragment;
 import com.nik35.smartstorehouse.utils.Constants;
 
 import java.util.List;
@@ -48,9 +51,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         switch (items.get(position).getType()) {
             case Constants.CONTAINER_ITEM:
                 ContainerHolder containerHolder = (ContainerHolder) viewHolder;
-                containerHolder.view.setOnClickListener(view -> Navigation.findNavController(fragment.requireView()).navigate(R.id.containerEditFragment));
+                Container container = items.get(position).getContainer();
+
+                containerHolder.view.setOnClickListener(view -> ((HomeFragment) fragment).selectedContainer(container));
+                containerHolder.name.setText(container.getName());
                 break;
             case Constants.CONTAINER_INSIDE_ITEM:
+                ContainerInsideHolder containerInsideHolder = (ContainerInsideHolder) viewHolder;
+
+                containerInsideHolder.name.setText(items.get(position).getItemName());
                 break;
         }
     }
@@ -75,18 +84,24 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     static class ContainerHolder extends RecyclerView.ViewHolder {
 
         CardView view;
+        TextView name;
 
         ContainerHolder(View itemView) {
             super(itemView);
 
             view = itemView.findViewById(R.id.view);
+            name = itemView.findViewById(R.id.name);
         }
     }
 
     static class ContainerInsideHolder extends RecyclerView.ViewHolder {
 
+        TextView name;
+
         ContainerInsideHolder(View itemView) {
             super(itemView);
+
+            name = itemView.findViewById(R.id.name);
         }
     }
 }

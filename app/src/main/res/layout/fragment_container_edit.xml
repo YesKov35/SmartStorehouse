@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:autofillHints="Название контейнера"
+        android:hint="@string/container_edit_hint_name"
+        android:inputType="text"
+        android:imeOptions="actionDone"/>
+
+    <EditText
+        android:id="@+id/item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:autofillHints="Что внутри?"
+        android:hint="@string/container_edit_hint_item_name"
+        android:inputType="text"
+        android:imeOptions="actionDone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/edit_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-</FrameLayout>
+</LinearLayout>
