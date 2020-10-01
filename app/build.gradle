@@ -42,4 +42,8 @@ dependencies {
     //Navigation Architecture Component________________________________________
     implementation 'androidx.navigation:navigation-fragment:2.3.0'
     implementation 'androidx.navigation:navigation-ui:2.3.0'
+
+    // DI Toothpick____________________________________________________________
+    implementation 'com.github.stephanenicolas.toothpick:toothpick-runtime:1.1.1'
+    annotationProcessor 'com.github.stephanenicolas.toothpick:toothpick-compiler:1.1.1'
 }

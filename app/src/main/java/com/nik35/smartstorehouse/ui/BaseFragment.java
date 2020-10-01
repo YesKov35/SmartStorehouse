@@ -9,15 +9,25 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.nik35.smartstorehouse.data.repository.DataRepository;
+import com.nik35.smartstorehouse.di.Scopes;
+
 import java.util.Objects;
+
+import javax.inject.Inject;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.navigation.Navigation;
+import toothpick.Scope;
+import toothpick.Toothpick;
 
 public abstract class BaseFragment extends AppCompatDialogFragment {
+
+    @Inject
+    public DataRepository dataRepository;
 
     private View rootView;
 
@@ -25,6 +35,9 @@ public abstract class BaseFragment extends AppCompatDialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(getLayoutRes(), container, false);
+
+        Scope scope = Toothpick.openScope(Scopes.DATA_SCOPE);
+        Toothpick.inject(this, scope);
 
         closeKeyboard();
         initView(savedInstanceState);
