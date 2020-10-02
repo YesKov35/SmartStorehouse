@@ -75,7 +75,9 @@ public class ContainerEditFragment extends BaseFragment {
 
                         adapter.notifyDataSetChanged();
                     }else{
-                        Navigation.findNavController(requireView()).navigate(R.id.homeFragment);
+                        try {
+                            Navigation.findNavController(requireView()).navigate(R.id.homeFragment);
+                        }catch (Exception ex){}
                     }
                 }
 
@@ -118,7 +120,7 @@ public class ContainerEditFragment extends BaseFragment {
 
             delete.setOnClickListener(view -> dataRepository.getMyRef().child(container.getId()).removeValue());
 
-            image.setOnClickListener(view -> ((MainActivity) requireActivity()).dispatchTakePictureIntent());
+            image.setOnClickListener(view -> ((MainActivity) requireActivity()).dispatchTakeCaptureIntent());
         }
     }
 
