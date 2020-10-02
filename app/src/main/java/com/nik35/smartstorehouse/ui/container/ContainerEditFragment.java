@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,6 +45,7 @@ public class ContainerEditFragment extends BaseFragment {
         EditText name = $(R.id.name);
         EditText itemName = $(R.id.item_name);
         RecyclerView editRecycler = $(R.id.edit_recycler);
+        ImageView delete = $(R.id.delete);
 
         List<RecyclerModel> recyclerModels = new ArrayList<>();
 
@@ -70,7 +73,7 @@ public class ContainerEditFragment extends BaseFragment {
 
                         adapter.notifyDataSetChanged();
                     }else{
-
+                        Navigation.findNavController(requireView()).popBackStack();
                     }
                 }
 
@@ -110,6 +113,8 @@ public class ContainerEditFragment extends BaseFragment {
                 }
                 return false;
             });
+
+            delete.setOnClickListener(view -> dataRepository.getMyRef().child(container.getId()).removeValue());
         }
     }
 

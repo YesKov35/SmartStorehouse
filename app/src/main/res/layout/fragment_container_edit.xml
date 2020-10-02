@@ -5,15 +5,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:autofillHints="Название контейнера"
-        android:hint="@string/container_edit_hint_name"
-        android:inputType="text"
-        android:imeOptions="actionDone"/>
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:autofillHints="Название контейнера"
+            android:hint="@string/container_edit_hint_name"
+            android:inputType="text"
+            android:imeOptions="actionDone"/>
+
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:src="@drawable/ic_delete_forever"/>
+    </LinearLayout>
 
     <EditText
         android:id="@+id/item_name"
