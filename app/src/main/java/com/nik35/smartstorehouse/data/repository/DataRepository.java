@@ -2,6 +2,8 @@ package com.nik35.smartstorehouse.data.repository;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.nik35.smartstorehouse.data.models.Container;
 
 import java.util.ArrayList;
@@ -9,6 +11,7 @@ import java.util.ArrayList;
 public class DataRepository {
 
     private DatabaseReference myRef;
+    private StorageReference mStorageRef;
     private Container selectedContainer;
 
     public DataRepository() {
@@ -17,14 +20,12 @@ public class DataRepository {
         myRef = FirebaseDatabase
                 .getInstance()
                 .getReference("anna");
+
+        mStorageRef = FirebaseStorage.getInstance().getReference();
     }
 
     public DatabaseReference getMyRef() {
         return myRef;
-    }
-
-    public void setMyRef(DatabaseReference myRef) {
-        this.myRef = myRef;
     }
 
     public Container getSelectedContainer() {
@@ -33,5 +34,9 @@ public class DataRepository {
 
     public void setSelectedContainer(Container selectedContainer) {
         this.selectedContainer = selectedContainer;
+    }
+
+    public StorageReference getmStorageRef() {
+        return mStorageRef;
     }
 }

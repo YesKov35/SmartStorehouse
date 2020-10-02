@@ -1,11 +1,13 @@
 package com.nik35.smartstorehouse.adapters;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.nik35.smartstorehouse.R;
 import com.nik35.smartstorehouse.data.models.Container;
 import com.nik35.smartstorehouse.ui.container.ContainerEditFragment;
@@ -56,6 +58,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
                 containerHolder.view.setOnClickListener(view -> ((HomeFragment) fragment).selectedContainer(container));
                 containerHolder.name.setText(container.getName());
+
+                if(container.getAvatar() != null && !container.getAvatar().isEmpty()) {
+                    Uri uri = Uri.parse(container.getAvatar());
+                    Glide.with(fragment).load(uri).into(containerHolder.image);
+                }
                 break;
             case Constants.CONTAINER_INSIDE_ITEM:
                 ContainerInsideHolder containerInsideHolder = (ContainerInsideHolder) viewHolder;
@@ -87,12 +94,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         CardView view;
         TextView name;
+        ImageView image;
 
         ContainerHolder(View itemView) {
             super(itemView);
 
             view = itemView.findViewById(R.id.view);
             name = itemView.findViewById(R.id.name);
+            image = itemView.findViewById(R.id.image);
         }
     }
 

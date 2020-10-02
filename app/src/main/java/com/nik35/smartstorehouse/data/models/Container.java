@@ -6,6 +6,7 @@ public class Container {
 
     private String id;
     private String name;
+    private String avatar;
     private List<String> items;
 
     public String getId() {
@@ -30,5 +31,13 @@ public class Container {
 
     public void setItems(List<String> items) {
         this.items = items;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

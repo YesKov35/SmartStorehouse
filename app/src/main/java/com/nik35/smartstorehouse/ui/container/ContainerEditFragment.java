@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.nik35.smartstorehouse.MainActivity;
 import com.nik35.smartstorehouse.R;
 import com.nik35.smartstorehouse.adapters.RecyclerAdapter;
 import com.nik35.smartstorehouse.adapters.RecyclerModel;
@@ -46,6 +47,7 @@ public class ContainerEditFragment extends BaseFragment {
         EditText itemName = $(R.id.item_name);
         RecyclerView editRecycler = $(R.id.edit_recycler);
         ImageView delete = $(R.id.delete);
+        ImageView image = $(R.id.image);
 
         List<RecyclerModel> recyclerModels = new ArrayList<>();
 
@@ -115,6 +117,8 @@ public class ContainerEditFragment extends BaseFragment {
             });
 
             delete.setOnClickListener(view -> dataRepository.getMyRef().child(container.getId()).removeValue());
+
+            image.setOnClickListener(view -> ((MainActivity) requireActivity()).dispatchTakePictureIntent());
         }
     }
 
