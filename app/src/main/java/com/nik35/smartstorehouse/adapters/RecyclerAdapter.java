@@ -3,10 +3,12 @@ package com.nik35.smartstorehouse.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nik35.smartstorehouse.R;
 import com.nik35.smartstorehouse.data.models.Container;
+import com.nik35.smartstorehouse.ui.container.ContainerEditFragment;
 import com.nik35.smartstorehouse.ui.home.HomeFragment;
 import com.nik35.smartstorehouse.utils.Constants;
 
@@ -15,7 +17,6 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
@@ -60,6 +61,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 ContainerInsideHolder containerInsideHolder = (ContainerInsideHolder) viewHolder;
 
                 containerInsideHolder.name.setText(items.get(position).getItemName());
+                containerInsideHolder.delete.setOnClickListener(view -> ((ContainerEditFragment) fragment).deleteItem(position));
                 break;
         }
     }
@@ -97,11 +99,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     static class ContainerInsideHolder extends RecyclerView.ViewHolder {
 
         TextView name;
+        ImageView delete;
 
         ContainerInsideHolder(View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.name);
+            delete = itemView.findViewById(R.id.delete);
         }
     }
 }

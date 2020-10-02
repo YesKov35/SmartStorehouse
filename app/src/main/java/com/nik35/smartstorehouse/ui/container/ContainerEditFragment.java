@@ -42,10 +42,9 @@ public class ContainerEditFragment extends BaseFragment {
 
         EditText name = $(R.id.name);
         EditText itemName = $(R.id.item_name);
+        RecyclerView editRecycler = $(R.id.edit_recycler);
 
         List<RecyclerModel> recyclerModels = new ArrayList<>();
-
-        RecyclerView editRecycler = $(R.id.edit_recycler);
 
         RecyclerAdapter adapter = new RecyclerAdapter(this, recyclerModels);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
@@ -67,8 +66,11 @@ public class ContainerEditFragment extends BaseFragment {
                             for (String name : container.getItems()) {
                                 recyclerModels.add(new RecyclerModel(Constants.CONTAINER_INSIDE_ITEM, name));
                             }
-                            adapter.notifyDataSetChanged();
                         }
+
+                        adapter.notifyDataSetChanged();
+                    }else{
+
                     }
                 }
 
@@ -109,5 +111,10 @@ public class ContainerEditFragment extends BaseFragment {
                 return false;
             });
         }
+    }
+
+    public void deleteItem(int position){
+        container.getItems().remove(position);
+        dataRepository.getMyRef().child(container.getId()).setValue(container);
     }
 }
