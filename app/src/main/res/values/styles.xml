@@ -9,12 +9,13 @@
 
     <style name="StyleContainerCard">
         <item name="cardCornerRadius">0dp</item>
-        <item name="cardElevation">5dp</item>
+        <item name="cardElevation">7dp</item>
         <item name="android:layout_margin">3dp</item>
     </style>
 
     <style name="StyleContainerText">
         <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColorHint">@color/colorWhite</item>
     </style>
 
 </resources>
