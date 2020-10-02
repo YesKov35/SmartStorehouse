@@ -73,7 +73,7 @@ public class ContainerEditFragment extends BaseFragment {
 
                         adapter.notifyDataSetChanged();
                     }else{
-                        Navigation.findNavController(requireView()).popBackStack();
+                        Navigation.findNavController(requireView()).navigate(R.id.homeFragment);
                     }
                 }
 
