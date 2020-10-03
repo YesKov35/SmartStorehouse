@@ -53,9 +53,10 @@ public class DemoBubblesView extends View {
         // create text rect for this font
         {
             fontPaint = new Paint();
-            fontPaint.setColor(Color.WHITE);
+            fontPaint.setColor(Color.BLACK);
             fontPaint.setAntiAlias(true);
-            fontPaint.setTextSize(14 * dp);
+            fontPaint.setTextSize(10 * dp);
+            fontPaint.setFakeBoldText(true);
             fontPaint.setTextAlign(Paint.Align.CENTER);
 
             textRect = new TextRect(fontPaint);
@@ -147,7 +148,7 @@ public class DemoBubblesView extends View {
                 height - paddingBoth);
 
         bubbleRect.set(x, y, x + width, y + h + paddingBoth);
-        canvas.drawRoundRect(bubbleRect, padding, padding, bubblePaint);
+        //canvas.drawRoundRect(bubbleRect, padding, padding, bubblePaint);
 
         textRect.draw(canvas, x + width / 2, y + padding);
     }
