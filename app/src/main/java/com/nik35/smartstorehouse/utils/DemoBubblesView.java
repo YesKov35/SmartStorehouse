@@ -2,12 +2,20 @@ package com.nik35.smartstorehouse.utils;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.nik35.smartstorehouse.MainActivity;
+import com.nik35.smartstorehouse.R;
 
 public class DemoBubblesView extends View {
     private static final String[] TEXTS = new String[]{
@@ -22,6 +30,10 @@ public class DemoBubblesView extends View {
     private int outerPadding;
     private int outerPaddingBoth;
     private int bubblePadding;
+
+    private Bitmap scaled;
+
+    private Point displaySize;
 
     public DemoBubblesView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -46,7 +58,27 @@ public class DemoBubblesView extends View {
         bubblePaint.setStyle(Paint.Style.FILL);
         bubblePaint.setColor(Color.BLUE);
         bubblePaint.setAntiAlias(true);
+
+        setDrawingCacheEnabled(true);
     }
+
+    public void setDisplaySize(Point displaySize) {
+        this.displaySize = displaySize;
+
+        ViewGroup.LayoutParams params = getLayoutParams();
+
+        params.width = displaySize.x;
+        params.height = displaySize.x;
+
+        setLayoutParams(params);
+
+        Bitmap background = BitmapFactory.decodeResource(getResources(), R.drawable.bg);
+        float scale = (float)background.getWidth()/(float)displaySize.x;
+        int newWidth = Math.round(background.getWidth()/scale);
+        int newHeight = Math.round(background.getHeight()/scale);
+        scaled = Bitmap.createScaledBitmap(background, newWidth, newHeight, true);
+    }
+
 
     @Override
     public void onDraw(Canvas canvas) {
@@ -54,6 +86,9 @@ public class DemoBubblesView extends View {
         int bubbleHeight = (getHeight() - outerPaddingBoth) / CELLS;
         int x = outerPadding;
         int y = outerPadding;
+
+        if(scaled != null)
+            canvas.drawBitmap(scaled, (displaySize.x - scaled.getWidth()) / 2, 0, null);
 
         for (int i = 0, l = TEXTS.length; i < l; ) {
             drawTextBubble(canvas, x, y, bubbleWidth, bubbleHeight,
@@ -66,6 +101,10 @@ public class DemoBubblesView extends View {
                 x += bubbleWidth + outerPadding;
             }
         }
+    }
+
+    public Bitmap get(){
+        return this.getDrawingCache();
     }
 
     private void drawTextBubble(
