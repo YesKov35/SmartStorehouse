@@ -5,6 +5,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Display;
+import android.widget.SeekBar;
 
 import com.nik35.smartstorehouse.R;
 import com.nik35.smartstorehouse.ui.BaseFragment;
@@ -38,6 +39,25 @@ public class DrawTextFragment extends BaseFragment {
         demoBubblesView.setDisplaySize(screenSize);
 
         $(R.id.save).setOnClickListener(view -> saveImage(demoBubblesView.get(), "temp"));
+
+        SeekBar textSize = $(R.id.text_size);
+
+        textSize.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                demoBubblesView.setTextSize(textSize.getProgress() + 10);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
     }
 

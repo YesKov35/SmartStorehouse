@@ -16,4 +16,11 @@
         android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <SeekBar
+        android:id="@+id/text_size"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="30"
+        app:layout_constraintBottom_toTopOf="@id/save"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

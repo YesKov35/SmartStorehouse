@@ -25,7 +25,7 @@ public class DemoBubblesView extends View {
 
     private final RectF bubbleRect = new RectF();
     private final Paint bubblePaint = new Paint();
-    private final TextRect textRect;
+    private TextRect textRect;
 
     private int outerPadding;
     private int outerPaddingBoth;
@@ -35,10 +35,13 @@ public class DemoBubblesView extends View {
 
     private Point displaySize;
 
+    private Paint fontPaint;
+    private float dp;
+
     public DemoBubblesView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        float dp = context.getResources().getDisplayMetrics().density;
+        dp = context.getResources().getDisplayMetrics().density;
 
         outerPadding = Math.round(16f * dp);
         outerPaddingBoth = (CELLS + 1) * outerPadding;
@@ -46,7 +49,7 @@ public class DemoBubblesView extends View {
 
         // create text rect for this font
         {
-            Paint fontPaint = new Paint();
+            fontPaint = new Paint();
             fontPaint.setColor(Color.WHITE);
             fontPaint.setAntiAlias(true);
             fontPaint.setTextSize(14 * dp);
@@ -60,6 +63,13 @@ public class DemoBubblesView extends View {
         bubblePaint.setAntiAlias(true);
 
         setDrawingCacheEnabled(true);
+    }
+
+    public void setTextSize(float size){
+        fontPaint.setTextSize(size * dp);
+        textRect = new TextRect(fontPaint);
+
+        invalidate();
     }
 
     public void setDisplaySize(Point displaySize) {
