@@ -17,6 +17,22 @@
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <SeekBar
+        android:id="@+id/padding_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/padding_start_end"/>
+
+    <SeekBar
+        android:id="@+id/padding_start_end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="200"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/text_size"/>
+
+    <SeekBar
         android:id="@+id/text_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -38,6 +38,9 @@ public class DemoBubblesView extends View {
     private Paint fontPaint;
     private float dp;
 
+    private int paddingTop = 200;
+    private int paddingStartEnd = 0;
+
     public DemoBubblesView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -63,6 +66,18 @@ public class DemoBubblesView extends View {
         bubblePaint.setAntiAlias(true);
 
         setDrawingCacheEnabled(true);
+    }
+
+    public void setPaddingStartEnd(int padding){
+        paddingStartEnd = padding;
+
+        invalidate();
+    }
+
+    public void setPaddingTop(int padding){
+        paddingTop = padding + 200;
+
+        invalidate();
     }
 
     public void setTextSize(float size){
@@ -101,7 +116,7 @@ public class DemoBubblesView extends View {
             canvas.drawBitmap(scaled, (displaySize.x - scaled.getWidth()) / 2, 0, null);
 
         for (int i = 0, l = TEXTS.length; i < l; ) {
-            drawTextBubble(canvas, x, y, bubbleWidth, bubbleHeight,
+            drawTextBubble(canvas, x + paddingStartEnd, paddingTop, bubbleWidth - paddingStartEnd * 2, bubbleHeight,
                     bubblePadding, TEXTS[i]);
 
             if (++i % CELLS == 0) {

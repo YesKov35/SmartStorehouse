@@ -41,11 +41,47 @@ public class DrawTextFragment extends BaseFragment {
         $(R.id.save).setOnClickListener(view -> saveImage(demoBubblesView.get(), "temp"));
 
         SeekBar textSize = $(R.id.text_size);
+        SeekBar paddingStartEnd = $(R.id.padding_start_end);
+        SeekBar paddingTop = $(R.id.padding_top);
 
         textSize.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 demoBubblesView.setTextSize(textSize.getProgress() + 10);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        paddingStartEnd.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                demoBubblesView.setPaddingStartEnd(paddingStartEnd.getProgress());
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        paddingTop.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                demoBubblesView.setPaddingTop(paddingTop.getProgress());
             }
 
             @Override
