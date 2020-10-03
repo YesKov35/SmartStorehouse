@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_navigation"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/drawTextFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -11,4 +11,8 @@
         android:id="@+id/containerEditFragment"
         android:name="com.nik35.smartstorehouse.ui.container.ContainerEditFragment"
         android:label="ContainerEditFragment" />
+    <fragment
+        android:id="@+id/drawTextFragment"
+        android:name="com.nik35.smartstorehouse.ui.draw.DrawTextFragment"
+        android:label="DrawTextFragment" />
 </navigation>
