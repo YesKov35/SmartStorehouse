@@ -1,7 +1,9 @@
 package com.nik35.smartstorehouse.ui.draw;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Display;
@@ -9,15 +11,19 @@ import android.widget.SeekBar;
 
 import com.nik35.smartstorehouse.R;
 import com.nik35.smartstorehouse.ui.BaseFragment;
+import com.nik35.smartstorehouse.ui.dialog.SetTextDialog;
 import com.nik35.smartstorehouse.utils.DemoBubblesView;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 import androidx.annotation.Nullable;
 
 public class DrawTextFragment extends BaseFragment {
+
+    private  DemoBubblesView demoBubblesView;
 
     @Override
     protected int getLayoutRes() {
@@ -35,10 +41,11 @@ public class DrawTextFragment extends BaseFragment {
         display.getSize(screenSize);
 
 
-        DemoBubblesView demoBubblesView = $(R.id.draw_view);
+        demoBubblesView = $(R.id.draw_view);
         demoBubblesView.setDisplaySize(screenSize);
 
         $(R.id.save).setOnClickListener(view -> saveImage(demoBubblesView.get(), "temp"));
+        $(R.id.set_text).setOnClickListener(view -> openSetTextDialog());
 
         SeekBar textSize = $(R.id.text_size);
         SeekBar paddingStartEnd = $(R.id.padding_start_end);
@@ -95,6 +102,18 @@ public class DrawTextFragment extends BaseFragment {
             }
         });
 
+    }
+
+    public void setText(String text){
+        demoBubblesView.setText(text);
+    }
+
+    public void openSetTextDialog(){
+        SetTextDialog setTextDialog = new SetTextDialog(this);
+
+        Objects.requireNonNull(setTextDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        setTextDialog.setCanceledOnTouchOutside(false);
+        setTextDialog.show();
     }
 
     private void saveImage(Bitmap finalBitmap, String image_name) {

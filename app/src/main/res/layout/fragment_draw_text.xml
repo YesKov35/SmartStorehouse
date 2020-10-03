@@ -9,12 +9,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/save"
+    <LinearLayout
+        android:id="@+id/save_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/save"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Сохранить"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/set_text"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="текст"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </LinearLayout>
 
     <SeekBar
         android:id="@+id/padding_top"
@@ -37,6 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="30"
-        app:layout_constraintBottom_toTopOf="@id/save"/>
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/save_view"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

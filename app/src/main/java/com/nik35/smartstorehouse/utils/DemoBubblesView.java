@@ -18,10 +18,8 @@ import com.nik35.smartstorehouse.MainActivity;
 import com.nik35.smartstorehouse.R;
 
 public class DemoBubblesView extends View {
-    private static final String[] TEXTS = new String[]{
-            "And now for something completely different. According to Wikipedia, the origin of this phrase \"is credited to Christopher Trace, founding presenter of the children's television programme Blue Peter, who used it (in all seriousness) as a link between segments\". Interesting, isn't it?"
-    };
-    private static final int CELLS = (int) Math.ceil(Math.sqrt(TEXTS.length));
+
+    private String text = "";
 
     private final RectF bubbleRect = new RectF();
     private final Paint bubblePaint = new Paint();
@@ -47,7 +45,7 @@ public class DemoBubblesView extends View {
         dp = context.getResources().getDisplayMetrics().density;
 
         outerPadding = Math.round(16f * dp);
-        outerPaddingBoth = (CELLS + 1) * outerPadding;
+        outerPaddingBoth = (1 + 1) * outerPadding;
         bubblePadding = Math.round(8f * dp);
 
         // create text rect for this font
@@ -67,6 +65,12 @@ public class DemoBubblesView extends View {
         bubblePaint.setAntiAlias(true);
 
         setDrawingCacheEnabled(true);
+    }
+
+    public void setText(String text){
+        this.text = text;
+
+        invalidate();
     }
 
     public void setPaddingStartEnd(int padding){
@@ -108,25 +112,23 @@ public class DemoBubblesView extends View {
 
     @Override
     public void onDraw(Canvas canvas) {
-        int bubbleWidth = (getWidth() - outerPaddingBoth) / CELLS;
-        int bubbleHeight = (getHeight() - outerPaddingBoth) / CELLS;
+        int bubbleWidth = (getWidth() - outerPaddingBoth);
+        int bubbleHeight = (getHeight() - outerPaddingBoth);
         int x = outerPadding;
         int y = outerPadding;
 
         if(scaled != null)
             canvas.drawBitmap(scaled, (displaySize.x - scaled.getWidth()) / 2, 0, null);
 
-        for (int i = 0, l = TEXTS.length; i < l; ) {
             drawTextBubble(canvas, x + paddingStartEnd, paddingTop, bubbleWidth - paddingStartEnd * 2, bubbleHeight,
-                    bubblePadding, TEXTS[i]);
+                    bubblePadding, text);
 
-            if (++i % CELLS == 0) {
+            /*if (++i % CELLS == 0) {
                 x = outerPadding;
                 y += bubbleHeight + outerPadding;
             } else {
                 x += bubbleWidth + outerPadding;
-            }
-        }
+            }*/
     }
 
     public Bitmap get(){
