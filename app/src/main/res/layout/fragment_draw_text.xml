@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/gradient1">
 
     <com.nik35.smartstorehouse.utils.DemoBubblesView
         android:id="@+id/draw_view"
@@ -20,8 +21,9 @@
             android:id="@+id/save"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_margin="5dp"
+            android:backgroundTint="@color/colorAccent2"
             android:text="Сохранить"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
@@ -29,8 +31,9 @@
             android:id="@+id/set_text"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_margin="5dp"
+            android:backgroundTint="@color/colorAccent2"
             android:text="текст"
             app:layout_constraintBottom_toBottomOf="parent"/>
     </LinearLayout>
@@ -47,6 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginStart="5dp"
+            android:backgroundTint="@color/colorAccent2"
             android:text="пред."/>
 
         <TextView
@@ -55,7 +59,7 @@
             android:layout_weight="1"
             android:text="10.10.2020"
             android:textSize="25sp"
-            android:textColor="#000"
+            android:textColor="#fff"
             android:gravity="center"
             android:fontFamily="@font/peddana_regular"
             android:layout_height="match_parent"/>
@@ -65,31 +69,79 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginEnd="5dp"
+            android:backgroundTint="@color/colorAccent2"
             android:text="след."/>
     </LinearLayout>
 
     <SeekBar
         android:id="@+id/padding_top"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:max="100"
         android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@id/padding_start_end"/>
+        android:layout_marginEnd="10dp"
+        android:thumbTint="@color/colorWhite"
+        android:progressTint="@color/colorWhite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/padding_start_end"
+        app:layout_constraintEnd_toStartOf="@+id/img_top" />
 
     <SeekBar
         android:id="@+id/padding_start_end"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:max="200"
         android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@id/text_size"/>
+        android:layout_marginEnd="10dp"
+        android:thumbTint="@color/colorWhite"
+        android:progressTint="@color/colorWhite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/text_size"
+        app:layout_constraintEnd_toStartOf="@+id/img_center" />
 
     <SeekBar
         android:id="@+id/text_size"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:max="30"
         android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
+        android:thumbTint="@color/colorWhite"
+        android:progressTint="@color/colorWhite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/img_text_size"
         app:layout_constraintBottom_toTopOf="@id/save_view"/>
+
+    <ImageView
+        android:id="@+id/img_text_size"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_text_fields"
+        android:padding="2dp"
+        app:layout_constraintBottom_toTopOf="@id/save_view"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/img_center"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:rotation="90"
+        android:src="@drawable/ic_vertical_align_center"
+        app:layout_constraintBottom_toTopOf="@id/text_size"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/img_top"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_vertical_align_center"
+        app:layout_constraintBottom_toTopOf="@id/padding_start_end"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
