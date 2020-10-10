@@ -167,7 +167,7 @@ public class DemoBubblesView extends View {
                 x += bubbleWidth + outerPadding;
             }*/
 
-            canvas.drawText(date, displaySize.x - 135, 190, fontDatePaint);
+            canvas.drawText(date, displaySize.x - 210, 270, fontDatePaint);
     }
 
     public Bitmap get(){
