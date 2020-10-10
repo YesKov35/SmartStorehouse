@@ -35,6 +35,39 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/padding_top">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/prev_date"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="5dp"
+            android:text="пред."/>
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="10.10.2020"
+            android:textSize="25sp"
+            android:textColor="#000"
+            android:gravity="center"
+            android:fontFamily="@font/peddana_regular"
+            android:layout_height="match_parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/next_date"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginEnd="5dp"
+            android:text="след."/>
+    </LinearLayout>
+
     <SeekBar
         android:id="@+id/padding_top"
         android:layout_width="match_parent"

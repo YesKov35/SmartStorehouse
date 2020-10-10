@@ -9,17 +9,28 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.nik35.smartstorehouse.MainActivity;
 import com.nik35.smartstorehouse.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+import androidx.core.content.res.ResourcesCompat;
+
 public class DemoBubblesView extends View {
 
     private String text = "";
+    private String date = "";
 
     private final RectF bubbleRect = new RectF();
     private final Paint bubblePaint = new Paint();
@@ -34,10 +45,14 @@ public class DemoBubblesView extends View {
     private Point displaySize;
 
     private Paint fontPaint;
+    private Paint fontDatePaint;
     private float dp;
 
     private int paddingTop = 200;
     private int paddingStartEnd = 0;
+
+    private Calendar calendar;
+    private DateFormat dateFormat;
 
     public DemoBubblesView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -58,6 +73,14 @@ public class DemoBubblesView extends View {
             fontPaint.setTextAlign(Paint.Align.CENTER);
 
             textRect = new TextRect(fontPaint);
+
+            fontDatePaint = new Paint();
+            fontDatePaint.setColor(Color.BLACK);
+            fontDatePaint.setAntiAlias(true);
+            fontDatePaint.setTextSize(70 * dp);
+            Typeface typeface = ResourcesCompat.getFont(context, R.font.peddana_regular);
+            fontDatePaint.setTypeface(typeface);
+            fontDatePaint.setTextAlign(Paint.Align.RIGHT);
         }
 
         bubblePaint.setStyle(Paint.Style.FILL);
@@ -65,6 +88,20 @@ public class DemoBubblesView extends View {
         bubblePaint.setAntiAlias(true);
 
         setDrawingCacheEnabled(true);
+
+        calendar = Calendar.getInstance();
+        dateFormat = new SimpleDateFormat("dd.MM.yyyy", java.util.Locale.getDefault());
+
+        date = dateFormat.format(calendar.getTime());
+    }
+
+    public void setDate(int d, TextView dateText){
+        calendar.add(Calendar.DAY_OF_YEAR, d);
+        date = dateFormat.format(calendar.getTime());
+
+        dateText.setText(date);
+
+        invalidate();
     }
 
     public void setText(String text){
@@ -129,6 +166,8 @@ public class DemoBubblesView extends View {
             } else {
                 x += bubbleWidth + outerPadding;
             }*/
+
+            canvas.drawText(date, displaySize.x - 135, 190, fontDatePaint);
     }
 
     public Bitmap get(){

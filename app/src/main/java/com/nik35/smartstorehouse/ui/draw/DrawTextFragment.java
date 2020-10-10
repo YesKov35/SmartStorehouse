@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.Display;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.nik35.smartstorehouse.R;
 import com.nik35.smartstorehouse.ui.BaseFragment;
@@ -102,6 +103,8 @@ public class DrawTextFragment extends BaseFragment {
             }
         });
 
+        $(R.id.prev_date).setOnClickListener(view -> demoBubblesView.setDate(-1, $(R.id.date)));
+        $(R.id.next_date).setOnClickListener(view -> demoBubblesView.setDate(1, $(R.id.date)));
     }
 
     public void setText(String text){
