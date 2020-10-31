@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.nik35.smartstorehouse.R;
 import com.nik35.smartstorehouse.data.models.Container;
 import com.nik35.smartstorehouse.ui.container.ContainerEditFragment;
+import com.nik35.smartstorehouse.ui.draw.GalleryFragment;
 import com.nik35.smartstorehouse.ui.home.HomeFragment;
 import com.nik35.smartstorehouse.utils.Constants;
 
@@ -103,6 +104,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     sharingIntent.putExtra("android.intent.extra.STREAM", photoURI);
                     fragment.startActivity(Intent.createChooser(sharingIntent, "Share using"));
                 });
+
+                galleryHolder.delete.setOnClickListener(view -> ((GalleryFragment) fragment).deleteImage(img));
                 break;
         }
     }

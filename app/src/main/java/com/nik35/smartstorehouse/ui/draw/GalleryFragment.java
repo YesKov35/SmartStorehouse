@@ -21,6 +21,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class GalleryFragment extends BaseFragment {
 
+    private List<RecyclerModel> recyclerModels;
+    private RecyclerView homeRecycler;
+
     @Override
     protected int getLayoutRes() {
         return R.layout.fragment_gallery;
@@ -32,13 +35,15 @@ public class GalleryFragment extends BaseFragment {
     @Override
     protected void initView(@Nullable Bundle bundle) {
 
-        List<RecyclerModel> recyclerModels = new ArrayList<>();
+        homeRecycler = $(R.id.gallery_recycler);
 
-        RecyclerView homeRecycler = $(R.id.gallery_recycler);
+        initRecycler(showImageList());
+    }
 
-        String[] images = showImageList();
-
+    private void initRecycler(String[] images){
         if(images != null){
+            recyclerModels = new ArrayList<>();
+
             String path = Objects.requireNonNull(requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES)).getAbsolutePath();
 
             for(String img : images){
@@ -49,6 +54,15 @@ public class GalleryFragment extends BaseFragment {
             GridLayoutManager manager = new GridLayoutManager(getContext(), 2);
             homeRecycler.setLayoutManager(manager);
             homeRecycler.setAdapter(adapter);
+        }
+    }
+
+    public void deleteImage(String url){
+        File myFile = new File(url);
+        boolean deleted = myFile.delete();
+
+        if(deleted){
+            initRecycler(showImageList());
         }
     }
 
