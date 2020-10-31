@@ -106,6 +106,8 @@ public class DrawTextFragment extends BaseFragment {
             }
         });
 
+        demoBubblesView.setDate(0, $(R.id.date));
+
         $(R.id.prev_date).setOnClickListener(view -> demoBubblesView.setDate(-1, $(R.id.date)));
         $(R.id.next_date).setOnClickListener(view -> demoBubblesView.setDate(1, $(R.id.date)));
     }
