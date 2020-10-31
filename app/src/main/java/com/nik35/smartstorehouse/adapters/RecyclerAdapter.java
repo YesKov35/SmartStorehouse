@@ -1,9 +1,12 @@
 package com.nik35.smartstorehouse.adapters;
 
+import android.content.Intent;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,10 +17,13 @@ import com.nik35.smartstorehouse.ui.container.ContainerEditFragment;
 import com.nik35.smartstorehouse.ui.home.HomeFragment;
 import com.nik35.smartstorehouse.utils.Constants;
 
+import java.io.File;
 import java.util.List;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -80,6 +86,23 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 if(img != null && !img.isEmpty()) {
                     Glide.with(fragment).load(img).into(galleryHolder.image);
                 }
+
+                galleryHolder.share.setOnClickListener(view -> {
+                    File myFile = new File(img);
+                    MimeTypeMap mime = MimeTypeMap.getSingleton();
+
+                    String ext = myFile.getName().substring(myFile.getName().lastIndexOf(".") + 1);
+                    String type = mime.getMimeTypeFromExtension(ext);
+
+                    Uri photoURI = FileProvider.getUriForFile(fragment.requireContext(),
+                            "com.nik35.smartstorehouse",
+                            myFile);
+
+                    Intent sharingIntent = new Intent("android.intent.action.SEND");
+                    sharingIntent.setType(type);
+                    sharingIntent.putExtra("android.intent.extra.STREAM", photoURI);
+                    fragment.startActivity(Intent.createChooser(sharingIntent, "Share using"));
+                });
                 break;
         }
     }
