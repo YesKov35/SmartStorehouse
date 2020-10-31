@@ -43,6 +43,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             case Constants.CONTAINER_INSIDE_ITEM:
                 itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_container_inside, parent, false);
                 return new ContainerInsideHolder(itemView);
+            case Constants.GALLERY_ITEM:
+                itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gallery, parent, false);
+                return new ContainerHolder(itemView);
             default:
                 throw new IllegalStateException("Unexpected value: " + viewType);
         }
@@ -70,6 +73,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 containerInsideHolder.name.setText(items.get(position).getItemName());
                 containerInsideHolder.delete.setOnClickListener(view -> ((ContainerEditFragment) fragment).deleteItem(position));
                 break;
+            case Constants.GALLERY_ITEM:
+                ContainerHolder galleryHolder = (ContainerHolder) viewHolder;
+                String img = items.get(position).getItemName();
+
+                if(img != null && !img.isEmpty()) {
+                    Glide.with(fragment).load(img).into(galleryHolder.image);
+                }
+                break;
         }
     }
 
@@ -80,6 +91,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 return Constants.CONTAINER_ITEM;
             case 1:
                 return Constants.CONTAINER_INSIDE_ITEM;
+            case 2:
+                return Constants.GALLERY_ITEM;
             default:
                 return -1;
         }
@@ -95,6 +108,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         CardView view;
         TextView name;
         ImageView image;
+        ImageView delete;
+        ImageView share;
 
         ContainerHolder(View itemView) {
             super(itemView);
@@ -102,6 +117,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             view = itemView.findViewById(R.id.view);
             name = itemView.findViewById(R.id.name);
             image = itemView.findViewById(R.id.image);
+            delete = itemView.findViewById(R.id.delete);
+            share = itemView.findViewById(R.id.share);
         }
     }
 

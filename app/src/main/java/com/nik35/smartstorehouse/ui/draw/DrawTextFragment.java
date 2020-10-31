@@ -18,9 +18,11 @@ import com.nik35.smartstorehouse.utils.DemoBubblesView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Objects;
 
 import androidx.annotation.Nullable;
+import androidx.navigation.Navigation;
 
 public class DrawTextFragment extends BaseFragment {
 
@@ -45,8 +47,9 @@ public class DrawTextFragment extends BaseFragment {
         demoBubblesView = $(R.id.draw_view);
         demoBubblesView.setDisplaySize(screenSize);
 
-        $(R.id.save).setOnClickListener(view -> saveImage(demoBubblesView.get(), "temp"));
+        $(R.id.save).setOnClickListener(view -> saveImage(demoBubblesView.get()));
         $(R.id.set_text).setOnClickListener(view -> openSetTextDialog());
+        $(R.id.gallery).setOnClickListener(view -> Navigation.findNavController(view).navigate(R.id.galleryFragment));
 
         SeekBar textSize = $(R.id.text_size);
         SeekBar paddingStartEnd = $(R.id.padding_start_end);
@@ -119,7 +122,7 @@ public class DrawTextFragment extends BaseFragment {
         setTextDialog.show();
     }
 
-    private void saveImage(Bitmap finalBitmap, String image_name) {
+    private void saveImage(Bitmap finalBitmap) {
 
         File file = null;
         try {

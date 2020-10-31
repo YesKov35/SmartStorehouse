@@ -19,4 +19,8 @@
         android:id="@+id/menuFragment"
         android:name="com.nik35.smartstorehouse.ui.menu.MenuFragment"
         android:label="MenuFragment" />
+    <fragment
+        android:id="@+id/galleryFragment"
+        android:name="com.nik35.smartstorehouse.ui.draw.GalleryFragment"
+        android:label="GalleryFragment" />
 </navigation>

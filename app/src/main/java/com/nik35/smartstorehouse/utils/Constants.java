@@ -7,5 +7,5 @@ public class Constants {
      */
     public static final int CONTAINER_ITEM = 0;
     public static final int CONTAINER_INSIDE_ITEM = 1;
-
+    public static final int GALLERY_ITEM = 2;
 }
