@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Любимая</string>
     <string name="container_edit_hint_name">Название контейнера</string>
-    <string name="container_edit_hint_item_name">Что внутри?</string>
+    <string name="container_edit_hint_item_name">Введи текст</string>
+    <string name="add_photo">Добавить фото</string>
 </resources>

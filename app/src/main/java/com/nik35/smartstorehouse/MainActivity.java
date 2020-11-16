@@ -30,6 +30,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     static final int REQUEST_TAKE_PHOTO = 3333;
     static final int REQUEST_IMAGE_CAPTURE = 3335;
+    static final int REQUEST_IMAGE_CAPTURE_ITEM = 8888;
 
     String currentPhotoPath;
 
@@ -75,6 +77,14 @@ public class MainActivity extends AppCompatActivity {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         try {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        } catch (ActivityNotFoundException e) {
+        }
+    }
+
+    public void takeCaptureForItemIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE_ITEM);
         } catch (ActivityNotFoundException e) {
         }
     }
@@ -116,6 +126,17 @@ public class MainActivity extends AppCompatActivity {
 
             UploadTask uploadTask = ref.putBytes(byteArray);
             uploadFile(ref, uploadTask);
+        }else if (requestCode == REQUEST_IMAGE_CAPTURE_ITEM && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            Objects.requireNonNull(imageBitmap).compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+            imageBitmap.recycle();
+
+            UploadTask uploadTask = ref.putBytes(byteArray);
+            uploadFileForItem(ref, uploadTask);
         }
 
     }
@@ -132,6 +153,29 @@ public class MainActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 Uri downloadUri = task.getResult();
                 dataRepository.getSelectedContainer().setAvatar(Objects.requireNonNull(downloadUri).toString());
+                dataRepository.getMyRef().child(dataRepository.getSelectedContainer().getId()).setValue(dataRepository.getSelectedContainer());
+            } else {
+            }
+        });
+    }
+
+    private void uploadFileForItem(StorageReference ref, UploadTask uploadTask){
+
+        uploadTask.continueWithTask(task -> {
+            if (!task.isSuccessful()) {
+                throw Objects.requireNonNull(task.getException());
+            }
+
+            return ref.getDownloadUrl();
+        }).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Uri downloadUri = task.getResult();
+
+                if(dataRepository.getSelectedContainer().getItems() == null){
+                    dataRepository.getSelectedContainer().setItems(new ArrayList<>());
+                }
+
+                dataRepository.getSelectedContainer().getItems().add(Objects.requireNonNull(downloadUri).toString());
                 dataRepository.getMyRef().child(dataRepository.getSelectedContainer().getId()).setValue(dataRepository.getSelectedContainer());
             } else {
             }

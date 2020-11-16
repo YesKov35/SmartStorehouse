@@ -121,6 +121,9 @@ public class ContainerEditFragment extends BaseFragment {
             delete.setOnClickListener(view -> dataRepository.getMyRef().child(container.getId()).removeValue());
 
             image.setOnClickListener(view -> ((MainActivity) requireActivity()).dispatchTakeCaptureIntent());
+
+            $(R.id.item_image).setOnClickListener(view -> ((MainActivity) requireActivity()).takeCaptureForItemIntent());
+            $(R.id.item_image_add).setOnClickListener(view -> ((MainActivity) requireActivity()).takeCaptureForItemIntent());
         }
     }
 
