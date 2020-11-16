@@ -25,6 +25,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -52,7 +53,8 @@ public class ContainerEditFragment extends BaseFragment {
         List<RecyclerModel> recyclerModels = new ArrayList<>();
 
         RecyclerAdapter adapter = new RecyclerAdapter(this, recyclerModels);
-        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        //LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        GridLayoutManager manager = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);
         editRecycler.setLayoutManager(manager);
         editRecycler.setAdapter(adapter);
 

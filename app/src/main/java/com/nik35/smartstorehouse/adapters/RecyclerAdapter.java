@@ -77,7 +77,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             case Constants.CONTAINER_INSIDE_ITEM:
                 ContainerInsideHolder containerInsideHolder = (ContainerInsideHolder) viewHolder;
 
-                containerInsideHolder.name.setText(items.get(position).getItemName());
+                if(items.get(position).getItemName().contains("firebasestorage") ||
+                        items.get(position).getItemName().contains("https")){
+                    Uri uri = Uri.parse(items.get(position).getItemName());
+                    Glide.with(fragment).load(uri).into(containerInsideHolder.image);
+                    containerInsideHolder.name.setVisibility(View.GONE);
+                }else {
+                    containerInsideHolder.name.setText(items.get(position).getItemName());
+                    containerInsideHolder.image.setVisibility(View.GONE);
+                }
                 containerInsideHolder.delete.setOnClickListener(view -> ((ContainerEditFragment) fragment).deleteItem(position));
                 break;
             case Constants.GALLERY_ITEM:
@@ -152,12 +160,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         TextView name;
         ImageView delete;
+        ImageView image;
 
         ContainerInsideHolder(View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.name);
             delete = itemView.findViewById(R.id.delete);
+            image = itemView.findViewById(R.id.image);
         }
     }
 }
